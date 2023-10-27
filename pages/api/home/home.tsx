@@ -40,6 +40,9 @@ import HomeContext from './home.context';
 import { HomeInitialState, initialState } from './home.state';
 
 import { v4 as uuidv4 } from 'uuid';
+import { signOut, useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
+
 
 interface Props {
   serverSideApiKeyIsSet: boolean;
@@ -346,6 +349,14 @@ const Home = ({
     serverSideApiKeyIsSet,
     serverSidePluginKeysSet,
   ]);
+  const router = useRouter();
+
+  const session = useSession({
+    required: true,
+    onUnauthenticated() {
+      router.push('/signin/page');
+    },
+  });
 
   return (
     <HomeContext.Provider
