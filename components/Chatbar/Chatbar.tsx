@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useCallback, useContext, useEffect } from 'react';
 
 import { useTranslation } from 'next-i18next';

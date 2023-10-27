@@ -42,6 +42,7 @@ import { HomeInitialState, initialState } from './home.state';
 
 import { v4 as uuidv4 } from 'uuid';
 import { signOut, useSession } from 'next-auth/react';
+import { redirect } from 'next/navigation';
 import { useRouter } from 'next/router';
 
 
@@ -235,7 +236,7 @@ const Home = ({
     if (window.innerWidth < 640) {
       dispatch({ field: 'showChatbar', value: false });
     }
-  }, [selectedConversation]);
+  }, [selectedConversation, dispatch]);
 
   useEffect(() => {
     defaultModelId &&
@@ -250,7 +251,7 @@ const Home = ({
         field: 'serverSidePluginKeysSet',
         value: serverSidePluginKeysSet,
       });
-  }, [defaultModelId, serverSideApiKeyIsSet, serverSidePluginKeysSet]);
+  }, [defaultModelId, serverSideApiKeyIsSet, serverSidePluginKeysSet, dispatch]);
 
   // ON LOAD --------------------------------------------
 
@@ -349,15 +350,17 @@ const Home = ({
     dispatch,
     serverSideApiKeyIsSet,
     serverSidePluginKeysSet,
+    conversations,
+    t
   ]);
-  const router = useRouter();
+  // const router = useRouter();
 
-  const session = useSession({
-    required: true,
-    onUnauthenticated() {
-      router.push('/signin/page');
-    },
-  });
+  // const session = useSession({
+  //   required: true,
+  //   onUnauthenticated() {
+  //     router.push('/signin/page');
+  //   },
+  // });
 
   return (
     <HomeContext.Provider
