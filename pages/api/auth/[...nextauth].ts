@@ -1,7 +1,7 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials";
 import {signInWithEmailAndPassword} from 'firebase/auth';
-import { auth } from "@/pages/firbase";
+import { auth } from "@/firbase";
 
 
 export const authOptions = {
